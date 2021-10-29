@@ -31,8 +31,11 @@ def nombre_de_lettres(mot):
     return nombre_de_lettres
 
 
+mot = mot_aleatoire()
+
+
 def mot_mystere():
-    mot = mot_aleatoire()  # creation de la variable "mot" avec le mot aleatoire
+  # creation de la variable "mot" avec le mot aleatoire
     nombre = -1  # creation de la variable "nombre" = -1
     mot_masque = ""  # creation de la variable "mot_masque"
     for caracatere in mot:
@@ -111,7 +114,6 @@ def jeu():
     boucle2 = False
     boucle3 = False
     print("Mot mystere :", mot_mystere())
-    mot = mot_aleatoire()
     mot_utilisateur = input("Proposez un mot :")
 
     if (nombre_de_tentatives == 10):
