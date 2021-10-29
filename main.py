@@ -109,6 +109,7 @@ def le_mot_est_juste(mot1, mot2):
 
 
 def jeu():
+    print("TEST1", mot)
     nombre_de_tentatives = 0
     boucle1 = True
     boucle2 = False
@@ -174,7 +175,7 @@ def jeu():
 
     while boucle3 == True:
         # suite ajout des lettres valides au mot mystere zbi
-        nouveau_mot = ajouter_lettres_valides(mot_utilisateur, mot)
+        nouveau_mot = ajouter_lettres_valides(mot, mot_utilisateur)
         nombre_caracteres = nombre_caracteres_manquent(
             mot_utilisateur, nouveau_mot, mot)
 
