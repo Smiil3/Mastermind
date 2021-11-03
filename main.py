@@ -35,22 +35,23 @@ def nombre_de_lettres(mot):
 mot = mot_aleatoire()
 
 
-def mot_mystere():
+def mot_mystere(difficulte):
   # creation de la variable "mot" avec le mot aleatoire
-    nombre = -1  # creation de la variable "nombre" = -1
-    mot_masque = ""  # creation de la variable "mot_masque"
-    for caracatere in mot:
-        nombre = nombre + 1  # pour chaque caractere on ajoute 1 a la variable "nombre"
-        if (nombre == 0):  # si la variable "nombre" est egale a 0 qui correspond a la premiere lettre du mot
+    if (difficulte == "Facile"):
+        nombre = -1  # creation de la variable "nombre" = -1
+        mot_masque = ""  # creation de la variable "mot_masque"
+        for caracatere in mot:
+            nombre = nombre + 1  # pour chaque caractere on ajoute 1 a la variable "nombre"
+            if (nombre == 0):  # si la variable "nombre" est egale a 0 qui correspond a la premiere lettre du mot
             # on ajoute le caractere a la variable "mot_masque"
-            mot_masque = mot_masque + caracatere
+                mot_masque = mot_masque + caracatere
         # sinon si nombre est egale au nombre de lettres present dans la variable "mot"
-        elif (nombre == nombre_de_lettres(mot)):
+            elif (nombre == nombre_de_lettres(mot)):
             # on ajout le caractere a la variable "mot_masque"
-            mot_masque = mot_masque + caracatere
-        else:
-            mot_masque = mot_masque + "*"  # sinon on ajoute "*" a la variable "mot_masque"
-    return mot_masque  # on retourne le mot mystere
+                mot_masque = mot_masque + caracatere
+            else:
+                mot_masque = mot_masque + "*"  # sinon on ajoute "*" a la variable "mot_masque"
+        return mot_masque  # on retourne le mot mystere
 
 
 def verfication_nombre_de_lettre(mot, mot2):
@@ -111,7 +112,14 @@ def le_mot_est_juste(mot1, mot2):
 
 def jeu(mode, difficulte):
     if (difficulte == "facile" or difficulte == "Facile" or difficulte == "FACILE"):
-        print("TEST1", mot)
+        if (mode == "SOLO" or mode == "Solo" or mode == "solo"):
+            mot_myst = mot
+        elif (mode == "Multijoueur" or mode == "MULTIJOUEUR" or mode == "multijoueur"):
+            mot_myst = input("Joueur nr 2, veuillez introduire le mot a deviner:")
+        else:
+            print("Ce mode de jeu n'est pas supporter: Solo/Multijoueur")
+
+        print("TEST1", mot_myst)
         nombre_de_tentatives = 0
         boucle1 = True
         boucle2 = False
@@ -129,9 +137,9 @@ def jeu(mode, difficulte):
 
         while boucle1 == True:
             # verif du nombre de lettres
-            if (verfication_nombre_de_lettre(mot_utilisateur, mot) == False):
+            if (verfication_nombre_de_lettre(mot_utilisateur, mot_myst) == False):
                 print("Votre mot contient", nombre_de_lettres(mot_utilisateur) +
-                    1, "lettres alors qu'il en faut", nombre_de_lettres(mot)+1)
+                1, "lettres alors qu'il en faut", nombre_de_lettres(mot_myst)+1)
                 mot_utilisateur = input("Proposez un mot :")
 
                 if (nombre_de_tentatives == 10):
@@ -142,14 +150,14 @@ def jeu(mode, difficulte):
                 else:
                     nombre_de_tentatives = nombre_de_tentatives+1
 
-            elif (verfication_nombre_de_lettre(mot_utilisateur, mot) == True):
+            elif (verfication_nombre_de_lettre(mot_utilisateur, mot_myst) == True):
                 boucle1 = False
                 boucle2 = True
 
         while boucle2 == True:
-            if (not mot_utilisateur[0] == mot[0]):
+            if (not mot_utilisateur[0] == mot_myst[0]):
                 print("La 1ere lettre de votre mot est un",
-                    mot_utilisateur[0], "alors que ca devrait etre un", mot[0])
+                    mot_utilisateur[0], "alors que ca devrait etre un", mot_myst[0])
                 mot_utilisateur = input("Proposez un mot :")
 
                 if (nombre_de_tentatives == 10):
@@ -159,8 +167,8 @@ def jeu(mode, difficulte):
                 else:
                     nombre_de_tentatives = nombre_de_tentatives+1
 
-            if (not mot_utilisateur[nombre_de_lettres(mot_utilisateur)] == mot[nombre_de_lettres(mot)]):
-                print("La derniere lettre de votre mot est un", mot_utilisateur[nombre_de_lettres(mot_utilisateur)], "alors que ca devrait etre", mot[nombre_de_lettres(mot)])
+            if (not mot_utilisateur[nombre_de_lettres(mot_utilisateur)] == mot_myst[nombre_de_lettres(mot_myst)]):
+                print("La derniere lettre de votre mot est un", mot_utilisateur[nombre_de_lettres(mot_utilisateur)], "alors que ca devrait etre", mot_myst[nombre_de_lettres(mot_myst)])
                 mot_utilisateur = input("Proposez un mot :")
 
                 if (nombre_de_tentatives == 10):
@@ -170,17 +178,17 @@ def jeu(mode, difficulte):
                 else:
                     nombre_de_tentatives = nombre_de_tentatives+1
 
-            elif (mot_utilisateur[0] == mot[0] and mot_utilisateur[nombre_de_lettres(mot_utilisateur)] == mot[nombre_de_lettres(mot)]):
+            elif (mot_utilisateur[0] == mot[0] and mot_utilisateur[nombre_de_lettres(mot_utilisateur)] == mot_myst[nombre_de_lettres(mot_myst)]):
                 boucle2 = False
                 boucle3 = True
 
         while boucle3 == True:
             # suite ajout des lettres valides au mot mystere zbi
-            nouveau_mot = ajouter_lettres_valides(mot, mot_utilisateur)
+            nouveau_mot = ajouter_lettres_valides(mot_myst, mot_utilisateur)
             nombre_caracteres = nombre_caracteres_manquent(
-                mot_utilisateur, nouveau_mot, mot)
+                mot_utilisateur, nouveau_mot, mot_myst)
 
-            if (le_mot_est_juste(mot_utilisateur, mot) == False):
+            if (le_mot_est_juste(mot_utilisateur, mot_myst) == False):
                 print("Mot mystere :", nouveau_mot)
                 print("Lettres mal place :", nombre_caracteres)
                 mot_utilisateur = input("Proposez un mot :")
@@ -191,13 +199,104 @@ def jeu(mode, difficulte):
                 else:
                     nombre_de_tentatives = nombre_de_tentatives+1
 
-            elif(le_mot_est_juste(mot_utilisateur, mot) == True):
+            elif(le_mot_est_juste(mot_utilisateur, mot_myst) == True):
                 boucle3 = False
                 print('Bravo tu as trouver le mot, nombre de tenatives:',nombre_de_tentatives)
 
     elif (difficulte == "difficile" or difficulte == "Difficile" or difficulte == "DIFFICILE"):
-        pass
+        #difficile:
+        if (mode == "SOLO" or mode == "Solo" or mode == "solo"):
+            mot_myst = mot
+        elif (mode == "Multijoueur" or mode == "MULTIJOUEUR" or mode == "multijoueur"):
+            mot_myst = input("Joueur nr 2, veuillez introduire le mot a deviner:")
+        else:
+            print("Ce mode de jeu n'est pas supporter: Solo/Multijoueur")
+
+        print("TEST1", mot_myst)
+        nombre_de_tentatives = 0
+        boucle1 = True
+        boucle2 = False
+        boucle3 = False
+        print("Mot mystere :", mot_mystere())
+        mot_utilisateur = input("Proposez un mot :")
+
+        if (nombre_de_tentatives == 10):
+            print("Tu as perdu.")
+            boucle1 = False
+            boucle2 = False
+            boucle3 = False
+        else:
+            nombre_de_tentatives = nombre_de_tentatives+1
+
+        while boucle1 == True:
+            # verif du nombre de lettres
+            if (verfication_nombre_de_lettre(mot_utilisateur, mot_myst) == False):
+                print("Votre mot contient", nombre_de_lettres(mot_utilisateur) +
+                1, "lettres alors qu'il en faut", nombre_de_lettres(mot_myst)+1)
+                mot_utilisateur = input("Proposez un mot :")
+
+                if (nombre_de_tentatives == 10):
+                    print("Tu as perdu.")
+                    boucle1 = False
+                    boucle2 = False
+                    boucle3 = False
+                else:
+                    nombre_de_tentatives = nombre_de_tentatives+1
+
+            elif (verfication_nombre_de_lettre(mot_utilisateur, mot_myst) == True):
+                boucle1 = False
+                boucle2 = True
+
+        while boucle2 == True:
+            if (not mot_utilisateur[0] == mot_myst[0]):
+                print("La 1ere lettre de votre mot est un",
+                    mot_utilisateur[0], "alors que ca devrait etre un", mot_myst[0])
+                mot_utilisateur = input("Proposez un mot :")
+
+                if (nombre_de_tentatives == 10):
+                    print("Tu as perdu.")
+                    boucle2 = False
+                    boucle3 = False
+                else:
+                    nombre_de_tentatives = nombre_de_tentatives+1
+
+            if (not mot_utilisateur[nombre_de_lettres(mot_utilisateur)] == mot_myst[nombre_de_lettres(mot_myst)]):
+                print("La derniere lettre de votre mot est un", mot_utilisateur[nombre_de_lettres(mot_utilisateur)], "alors que ca devrait etre", mot_myst[nombre_de_lettres(mot_myst)])
+                mot_utilisateur = input("Proposez un mot :")
+
+                if (nombre_de_tentatives == 10):
+                    print("Tu as perdu.")
+                    boucle2 = False
+                    boucle3 = False
+                else:
+                    nombre_de_tentatives = nombre_de_tentatives+1
+
+            elif (mot_utilisateur[0] == mot[0] and mot_utilisateur[nombre_de_lettres(mot_utilisateur)] == mot_myst[nombre_de_lettres(mot_myst)]):
+                boucle2 = False
+                boucle3 = True
+
+        while boucle3 == True:
+            # suite ajout des lettres valides au mot mystere zbi
+            nouveau_mot = ajouter_lettres_valides(mot_myst, mot_utilisateur)
+            nombre_caracteres = nombre_caracteres_manquent(
+                mot_utilisateur, nouveau_mot, mot_myst)
+
+            if (le_mot_est_juste(mot_utilisateur, mot_myst) == False):
+                print("Mot mystere :", nouveau_mot)
+                print("Lettres mal place :", nombre_caracteres)
+                mot_utilisateur = input("Proposez un mot :")
+
+                if (nombre_de_tentatives == 10):
+                    print("Tu as perdu.")
+                    boucle3 = False
+                else:
+                    nombre_de_tentatives = nombre_de_tentatives+1
+
+            elif(le_mot_est_juste(mot_utilisateur, mot_myst) == True):
+                boucle3 = False
+                print('Bravo tu as trouver le mot, nombre de tenatives:',nombre_de_tentatives)
+
     else:
-        print("La difficulte n'est pas supporte")
-        
+        print("La difficulte n'est pas supporter: Facile/Difficile")
+
 jeu("solo", "facile")
