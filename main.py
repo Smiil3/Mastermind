@@ -1,5 +1,5 @@
 from os import error
-from random import *
+from random import * 
 
 
 def mot_aleatoire():  # creation de la fonction "mot_aleatoire" pour recuperer le mot aleatoire
@@ -27,7 +27,7 @@ def mot_aleatoire():  # creation de la fonction "mot_aleatoire" pour recuperer l
 
 def nombre_de_lettres(mot):
     nombre_de_lettres = -1  # creation de la variable "nombre_de_lettres" = -1
-    for lettres in mot:
+    for lettres in mot: #pour chaque lettre on fait +1
         nombre_de_lettres = nombre_de_lettres + 1
     return nombre_de_lettres
 
@@ -36,18 +36,17 @@ def nombre_de_lettres(mot):
 
 
 def mot_mystere(difficulte, mode):
-    if (mode == "SOLO" or mode == "Solo" or mode == "solo"):
-        mot =  mot_aleatoire()
-    elif (mode == "Multijoueur" or mode == "MULTIJOUEUR" or mode == "multijoueur"):
-        mot = input("Joueur nr 2, veuillez introduire le mot a deviner:")
-    else:
+    if (mode == "SOLO" or mode == "Solo" or mode == "solo"): #si le mode est solo alors
+        mot =  mot_aleatoire() #on fait appel a la function mot_aleatoire
+    elif (mode == "Multijoueur" or mode == "MULTIJOUEUR" or mode == "multijoueur"): #sinon si le mode est multijoueur on demande le mot au joueur nr2
+        mot = input("Joueur nr 2, veuillez introduire le mot a deviner:") #on demande le mot au joueur 2
+    else: #sinon message d'erreur
         print("Ce mode de jeu n'est pas supporter: Solo/Multijoueur")
 
-  # creation de la variable "mot" avec le mot aleatoire
-    if (difficulte == "Facile" or difficulte == "FACILE" or difficulte == "facile"):
+    if (difficulte == "Facile" or difficulte == "FACILE" or difficulte == "facile"): # si la difficulte est facile alors
         nombre = -1  # creation de la variable "nombre" = -1
         mot_masque = ""  # creation de la variable "mot_masque"
-        for caracatere in mot:
+        for caracatere in mot: 
             nombre = nombre + 1  # pour chaque caractere on ajoute 1 a la variable "nombre"
             if (nombre == 0):  # si la variable "nombre" est egale a 0 qui correspond a la premiere lettre du mot
             # on ajoute le caractere a la variable "mot_masque"
@@ -58,17 +57,18 @@ def mot_mystere(difficulte, mode):
                 mot_masque = mot_masque + caracatere
             else:
                 mot_masque = mot_masque + "*"  # sinon on ajoute "*" a la variable "mot_masque"
-        return mot_masque, mot  # on retourne le mot mystere
-    elif (difficulte == "Difficile" or difficulte == "difficile" or difficulte == 'DIFFICILE'):
+        return mot_masque, mot  # on retourne le mot mystere et le mot de la fonction mot_aleatoire
+    elif (difficulte == "Difficile" or difficulte == "difficile" or difficulte == 'DIFFICILE'): #sinon si la difficulte est difficile 
         mot_masque = ""  # creation de la variable "mot_masque"
-        for caracatere in mot:
+        for caracatere in mot:  # pour chaque caractere on remplace le caractere par un *
             mot_masque = mot_masque + "*"
-        return mot_masque, mot
+        return mot_masque, mot #on retourn le mot du utilisateur et le mot mystere
     else:
-        print("La difficulte n'est pas supporter: Facile/Difficile")
+        print("La difficulte n'est pas supporter: Facile/Difficile") #sinon message d'erreur
 
 def verfication_nombre_de_lettre(mot, mot2):
-    if (nombre_de_lettres(mot) < nombre_de_lettres(mot2) or nombre_de_lettres(mot) > nombre_de_lettres(mot2)):
+    if (nombre_de_lettres(mot) < nombre_de_lettres(mot2) or nombre_de_lettres(mot) > nombre_de_lettres(mot2)): 
+        #si le nombre de lettre de mot1 n'est pas egal a celui de mot2 on return false sinon true
         resultat = False
     else:
         resultat = True
@@ -116,7 +116,7 @@ def nombre_caracteres_manquent(mot1, mot2, mot):
 
 
 def le_mot_est_juste(mot1, mot2):
-    if (mot1 == mot2):
+    if (mot1 == mot2): #si le mot1 est egal a mot2 alors on return True sinon false
         a = True
     else:
         a = False
