@@ -16,7 +16,7 @@ def mot_aleatoire(): # creation de la fonction "mot_aleatoire" pour recuperer le
 
 
 def nombre_de_lettres(mot): 
-    m=0 #au départ le nombre de caractere "m" est égal a 0
+    m=-1 #au départ le nombre de caractere "m" est égal a 0
     for caractere in mot: #parcours un caractere dans le mot
         m=m+1 #ajoute 1 au nombre de lettre
     return m #retourne le nombre de lettre (résultat)
@@ -67,9 +67,9 @@ def mot_mystere(difficulte, mode):
 
 def verification_nombre_de_lettre(mot1, mot2):
     if (nombre_de_lettres(mot1) < nombre_de_lettres(mot2) or nombre_de_lettres(mot1) > nombre_de_lettres(mot2)): #le nombre de lettres (fonction1) du mot1 < ou > au nombre de lettres du mot2
-        n = True #alors n est égal a la valeur booléen True (vrai)
+        n = False #alors n est égal a la valeur booléen True (vrai)
     else : #sinon
-        n = False #n est égal a la valeur booléen False (faux)
+        n = True #n est égal a la valeur booléen False (faux)
     return n #retourne la valeur booléene
 
 
@@ -146,7 +146,7 @@ def jeu():
     resultat_de_la_fonction_m_myst = mot_mystere(difficulte, mode) # on enregistre les 2 resultats de la fonction "mot_mystere" dans la variable "resultat_de_la_fonction_m_myst"
     mot_myst = resultat_de_la_fonction_m_myst[1] # on enregistre le deuxieme resultat de la fonction "mot_mystere" dans la variable "mot_myst"
     nombre_de_tentatives = 0 # on definie la variable "nombre_de_tentatives" qui est egale  0
-
+    print("TEST MOT MYST", mot_myst)
 
     """
     Ici on choisi les boucles que le programme va utiliser et le nombre 
@@ -162,7 +162,7 @@ def jeu():
         boucle1 = False
         boucle2 = False
         boucle3 = False
-        boucle4= True
+        boucle4 = True
         tentatives = 7
 
     """
@@ -182,8 +182,6 @@ def jeu():
         boucle4 = False
     else: # sinon
         nombre_de_tentatives = nombre_de_tentatives + 1 # on ajoute une tentative de plus au nombre de tentatives
-
-
 
 
     """
