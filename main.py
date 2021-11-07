@@ -209,9 +209,6 @@ def jeu():
             boucle2 = True # on rentre dans la boucle 2
 
     
-    
-    
-
     """
     Dans cette deuxieme boucle nous allons verifier que la premiere lettre que l'utlisateur
     a entre, correspond bien a la premiere lettre du mot mystere a trouver, sinon on lui redemande
