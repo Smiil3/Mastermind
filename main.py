@@ -77,12 +77,11 @@ def ajouter_lettres_valides(mot1, mot2):
     nombre  = -1 #au départ le caractere "nombre" est égal a -1 soit 0
     m = ""
     for caractere in mot1: #parcours un caractere dans le mot1
-        nombre = nombre + 1 #ajoute 1 a nombre au départ égal a -1
-        if (nombre == 0): #si le nombre est egal a 0 soit a la premiere lettre du mot 
-            m = m + caractere #on ajoute le caractere a "m"
-        elif (nombre == nombre_de_lettres(mot1)): #si le nombre est egal au nombre total soit a la derniere lettre du mot
-            m = m + caractere #on ajoute le caractere a "m"
-        elif (caractere == mot2[nombre]): #si caractere du mot1 correspond au même caractere du mot2
+        nombre = nombre + 1
+        if (nombre > nombre_de_lettres(mot2)):
+            return None # ici pour ne pas avoir une erreur on retourne un valeur vide qu'on remplacera plus tard
+         #ajoute 1 a nombre au départ égal a -1
+        if (caractere == mot2[nombre]): #si caractere du mot1 correspond au même caractere du mot2
             m = m + caractere #on ajoute le caractere a "m"
         else: #sinon
             m = m + "*" #puisque caractere n'est pas valide on ajoute un "*"
