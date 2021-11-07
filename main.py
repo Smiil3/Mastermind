@@ -1,101 +1,92 @@
-from os import error
-from random import * 
+import random 
 
 
-def mot_aleatoire():  # creation de la fonction "mot_aleatoire" pour recuperer le mot aleatoire
-    # creation de la variable "fichier" qui ouvre le ficher en mode lecture
-    fichier = open("dictionnaire.txt", "r")
-    mot = ""  # creation de la variable "mot" egale a un string
-    mots = []  # creation d'une array "mots"
-    # creation de la variable "nombre_de_mots" egale a -1 car l'array commence a 0
-    nombre_de_mots = -1
-    for ligne in fichier.readlines():
-        nombre_de_mots = nombre_de_mots + 1
-        # on rajoute a notre array "mots" le mot de la ligne sans le retour a la ligne "\n"
-        mots.append([ligne[:-1]])
-    fichier.close()  # fermeture du fichier
-    nombre_aleatoire = randint(0, nombre_de_mots)
-    """
-    creation de la variable "nombre_aleatoire" de mots presents 
-    dans le fichier et on le garde dans la variable nombre_aleatoire
-    """
-    mot = mot + str(mots[nombre_aleatoire]
-                    )  # on ajoute le mot aleatoire sous forme de string a la variable "mot"
-    # on supprime le "['" et le "']" de l'array et on retorune le mot aleatoire
-    return mot[2:-2]
+def mot_aleatoire(): # creation de la fonction "mot_aleatoire" pour recuperer le mot aleatoire
+    fichier=open("dictionnaire.txt","r") # creation de la variable "fichier" qui ouvre le ficher en mode lecture
+    mot = "" # creation de la variable "mot" egale a un string
+    mots=[] # creation d'une array "mots"
+    nombre_de_mots=-1 # creation de la variable "nombre_de_mots" egale a -1 car l'array commence a 0
+    for ligne in fichier.readlines(): # cette fonction va lire tout les lignes du fichier
+        nombre_de_mots=nombre_de_mots+1 # il va compter toute les lignes
+        mots.append(ligne[:-1])#il va prendre tout les lettres du mots sauf la derniere
+    fichier.close() # ferme le fichier
+    nombre_aleatoire = random.randint(0, nombre_de_mots) # on va choisir un nombre aléatoire entre 0 et le nombre de lignes
+    mot = mot + str(mots[nombre_aleatoire])#il va mettre le mot en str
+    return mot # il va retourner le mot
 
 
-def nombre_de_lettres(mot):
-    nombre_de_lettres = -1  # creation de la variable "nombre_de_lettres" = -1
-    for lettres in mot: #pour chaque lettre on fait +1
-        nombre_de_lettres = nombre_de_lettres + 1
-    return nombre_de_lettres
+def nombre_de_lettres(mot): 
+    m=0 #au départ le nombre de caractere "m" est égal a 0
+    for caractere in mot: #parcours un caractere dans le mot
+        m=m+1 #ajoute 1 au nombre de lettre
+    return m #retourne le nombre de lettre (résultat)
 
 
-
-
-
+"""
+Quand le mode = 1 signifie que le jeu va etre solo.
+Quand le mode = 2 signigie que le jeu va etre en multijoueur. 
+Quand la difficulte = 1 signifie que le jeu va etre facile.
+Quand la difficulte = 2 signigie que le jeu va etre difficile.
+"""
 def mot_mystere(difficulte, mode):
+
+    """
+    Dans un premiere partie on va verifier
+    si le jeu est en solo ou si il est en multijoueur.
+    """
     if (mode == 1): #si le mode est solo alors
         mot =  mot_aleatoire() #on fait appel a la function mot_aleatoire
     elif (mode == 2): #sinon si le mode est multijoueur on demande le mot au joueur nr2
-        mot = input("Joueur nr 2, veuillez introduire le mot a deviner:") #on demande le mot au joueur 2
+        mot = input("Joueur nr 2, veuillez introduire le mot a deviner en majuscule:") #on demande le mot au joueur 2
     else: #sinon message d'erreur
         print("Ce mode de jeu n'est pas supporter: Solo/Multijoueur")
 
-    if (difficulte == 1): # si la difficulte est facile alors
-        nombre = -1  # creation de la variable "nombre" = -1
-        mot_masque = ""  # creation de la variable "mot_masque"
-        for caracatere in mot: 
-            nombre = nombre + 1  # pour chaque caractere on ajoute 1 a la variable "nombre"
-            if (nombre == 0):  # si la variable "nombre" est egale a 0 qui correspond a la premiere lettre du mot
-            # on ajoute le caractere a la variable "mot_masque"
-                mot_masque = mot_masque + caracatere
-        # sinon si nombre est egale au nombre de lettres present dans la variable "mot"
-            elif (nombre == nombre_de_lettres(mot)):
-            # on ajout le caractere a la variable "mot_masque"
-                mot_masque = mot_masque + caracatere
-            else:
-                mot_masque = mot_masque + "*"  # sinon on ajoute "*" a la variable "mot_masque"
-        return mot_masque, mot  # on retourne le mot mystere et le mot de la fonction mot_aleatoire
-    elif (difficulte == 2): #sinon si la difficulte est difficile 
-        mot_masque = ""  # creation de la variable "mot_masque"
-        for caracatere in mot:  # pour chaque caractere on remplace le caractere par un *
-            mot_masque = mot_masque + "*"
-        return mot_masque, mot #on retourn le mot du utilisateur et le mot mystere
-    else:
-        print("La difficulte n'est pas supportee!") #sinon message d'erreur
+    """
+    Dans cette deuxieme partie on va verifier 
+    si le jeu est facile ou difficile.
+    """
+    if (difficulte == 1): # si la "difficulte" est facile
+        mot2 = " " # cette variable créé le mot2 et va le mettre en string 
+        for caractere in mot: # parcourir chaque caractere dans la variable "mot"
+            if caractere in mot[1 : -1]: # si la lettre est comprise entre la 1ere lettre exclue et la derniere exclue on ajoute une * genre x appartient a ]1;-1[
+                mot2 = mot2 + "*" # va prendre le mot 2 + des astérixs sauf pour la premiere et derniere lettre
+            else: # sinon 
+                mot2 = mot2+caractere # on ajoute la lettre ici representer par la variable "i" au mot
+        return mot2, mot # on retourne le mot mystere et le mot de la fonction mot_aleatoire
 
-def verfication_nombre_de_lettre(mot, mot2):
-    if (nombre_de_lettres(mot) < nombre_de_lettres(mot2) or nombre_de_lettres(mot) > nombre_de_lettres(mot2)): 
-        #si le nombre de lettre de mot1 n'est pas egal a celui de mot2 on return false sinon true
-        resultat = False
-    else:
-        resultat = True
-    return resultat
+    elif (difficulte == 2): # sinon si la "difficulte" est difficile 
+        mot2 = ""  # cette variable créé le mot2 et va le mettre en string 
+        for caracatere in mot:
+            mot2 = mot2 + "*" # pour chaque caractere present dans "mot" on va ajouter des astérixs
+        return mot2, mot # on retourne le mot mystere et le mot aleatoire ou celui tape par le joueur nr2 en fonction du mode de jeu choisi
+
+    else: # sinon
+        print("La difficulte n'est pas supportee!") # on montre le message d'erreur au joueur
 
 
-def ajouter_lettres_valides(mot, mot2):
-    nombre = -1
-    mot_masque = ""
-    for caractere in mot:
-        nombre = nombre + 1
-        if (nombre > nombre_de_lettres(mot2)):
-            return #HELP
-        if (nombre == 0):  # si la variable "nombre" est egale a 0 qui correspond a la premiere lettre du mot
-            # on ajoute le caractere a la variable "mot_masque"
-            mot_masque = mot_masque + caractere
-        # sinon si nombre est egale au nombre de lettres present dans la variable "mot"
-        elif (nombre == nombre_de_lettres(mot)):
-            # on ajout le caractere a la variable "mot_masque"
-            mot_masque = mot_masque + caractere
-        elif caractere == mot2[nombre]:
-            # sinon on ajoute "*" a la variable "mot_masque"
-            mot_masque = mot_masque + caractere
-        else:
-            mot_masque = mot_masque + "*"
 
-    return mot_masque
+def verification_nombre_de_lettre(mot1, mot2):
+    if (nombre_de_lettres(mot1) < nombre_de_lettres(mot2) or nombre_de_lettres(mot1) > nombre_de_lettres(mot2)): #le nombre de lettres (fonction1) du mot1 < ou > au nombre de lettres du mot2
+        n = True #alors n est égal a la valeur booléen True (vrai)
+    else : #sinon
+        n = False #n est égal a la valeur booléen False (faux)
+    return n #retourne la valeur booléene
+
+
+def ajouter_lettres_valides(mot1, mot2):
+    nombre  = -1 #au départ le caractere "nombre" est égal a -1 soit 0
+    m = ""
+    for caractere in mot1: #parcours un caractere dans le mot1
+        nombre = nombre + 1 #ajoute 1 a nombre au départ égal a -1
+        if (nombre == 0): #si le nombre est egal a 0 soit a la premiere lettre du mot 
+            m = m + caractere #on ajoute le caractere a "m"
+        elif (nombre == nombre_de_lettres(mot1)): #si le nombre est egal au nombre total soit a la derniere lettre du mot
+            m = m + caractere #on ajoute le caractere a "m"
+        elif (caractere == mot2[nombre]): #si caractere du mot1 correspond au même caractere du mot2
+            m = m + caractere #on ajoute le caractere a "m"
+        else: #sinon
+            m = m + "*" #puisque caractere n'est pas valide on ajoute un "*"
+    return m #retourne la valeur de m soit un caractere ou bien un "*"
 
 
 def nombre_caracteres_manquent(mot1, mot2, mot_a_trouver):
@@ -153,9 +144,14 @@ def jeu():
             print("Le mode de jeu choisi est n'existe pas.")
 
     resultat_de_la_fonction_m_myst = mot_mystere(difficulte, mode) # on enregistre les 2 resultats de la fonction "mot_mystere" dans la variable "resultat_de_la_fonction_m_myst"
-    mot_myst = resultat_de_la_fonction_m_myst[1]
+    mot_myst = resultat_de_la_fonction_m_myst[1] # on enregistre le deuxieme resultat de la fonction "mot_mystere" dans la variable "mot_myst"
     nombre_de_tentatives = 0 # on definie la variable "nombre_de_tentatives" qui est egale  0
 
+
+    """
+    Ici on choisi les boucles que le programme va utiliser et le nombre 
+    de tentatives en fonction du choix de mode de jeu du joueur.
+    """
     if (difficulte == 1):
         boucle1 = True
         boucle2 = False
@@ -168,17 +164,24 @@ def jeu():
         boucle3 = False
         boucle4= True
         tentatives = 7
-    print("TEST", resultat_de_la_fonction_m_myst[1], nombre_de_lettres(resultat_de_la_fonction_m_myst[1]))
+
+    """
+    Ici on montre pour la premiere fois au joueur le mot mystere 
+    et on lui demande d'entrer un mot pour rentrer dans la boucle 1
+    ou dans la boucle 4 en fonction du mode de jeu choisi.
+    """
     print("Mot mystere :", resultat_de_la_fonction_m_myst[0])
     mot_utilisateur = input("Proposez un mot :")
 
-    if (nombre_de_tentatives == tentatives):
-        print("Tu as perdu.")
-        boucle1 = False
+    if (nombre_de_tentatives == tentatives): # si le nombre de tentatives est egal a la limite de tentatives
+        print("Vous avez perdu perdu.") # ici on averti le joueur qu'il a perdu
+        # on desactive toutes les boucles
+        boucle1 = False 
         boucle2 = False
         boucle3 = False
-    else:
-        nombre_de_tentatives = nombre_de_tentatives+1
+        boucle4 = False
+    else: # sinon
+        nombre_de_tentatives = nombre_de_tentatives + 1 # on ajoute une tentative de plus au nombre de tentatives
 
 
 
@@ -190,7 +193,7 @@ def jeu():
     """
     while boucle1 == True:
 
-        if (verfication_nombre_de_lettre(mot_utilisateur, mot_myst) == False): # si notre fonction "verification_nombre_de_lettres" retourne une valuer booleen "False"
+        if (verification_nombre_de_lettre(mot_utilisateur, mot_myst) == False): # si notre fonction "verification_nombre_de_lettres" retourne une valuer booleen "False"
             print("Votre mot contient", nombre_de_lettres(mot_utilisateur) + 1, "lettres alors qu'il en faut", nombre_de_lettres(mot_myst)+1) # on montre l'erreur au joueur
             mot_utilisateur = input("Proposez un mot :") #on redemande au joueur de resaisir le mot
 
@@ -204,7 +207,7 @@ def jeu():
             else:  # sinon
                 nombre_de_tentatives = nombre_de_tentatives + 1 # on ajoute une tentative de plus au nombre de tentatives
 
-        elif (verfication_nombre_de_lettre(mot_utilisateur, mot_myst) == True): # sinon si notre fonction "verification_nombre_de_lettres" retourne une valeur booleen "True"
+        elif (verification_nombre_de_lettre(mot_utilisateur, mot_myst) == True): # sinon si notre fonction "verification_nombre_de_lettres" retourne une valeur booleen "True"
             boucle1 = False # on sort de la boucle 1
             boucle2 = True # on rentre dans la boucle 2
 
@@ -298,14 +301,6 @@ def jeu():
         elif (le_mot_est_juste(mot_utilisateur, mot_myst) == True): # sinon si la fonction "le_mot_est_juste" nous retourne une valeur booleen "True"
             print('Bravo tu as trouver le mot, nombre de tenatives:', nombre_de_tentatives) # on montre au joueur qu'il a gagner
             boucle4 = False #on sort de la boucle 4
-
-"""
-Modes possible pour jouer:
-1 - jeu("multijoueur", "facile")
-2 - jeu("solo", "facile")
-3 - jeu("multijoueur", "difficile")
-4 - jeu("solo", "difficile")
-"""
 
 jeu()
 
