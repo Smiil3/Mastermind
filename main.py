@@ -145,7 +145,6 @@ def jeu():
     resultat_de_la_fonction_m_myst = mot_mystere(difficulte, mode) # on enregistre les 2 resultats de la fonction "mot_mystere" dans la variable "resultat_de_la_fonction_m_myst"
     mot_myst = resultat_de_la_fonction_m_myst[1] # on enregistre le deuxieme resultat de la fonction "mot_mystere" dans la variable "mot_myst"
     nombre_de_tentatives = 0 # on definie la variable "nombre_de_tentatives" qui est egale  0
-    print("TEST MOT MYST", mot_myst)
 
     """
     Ici on choisi les boucles que le programme va utiliser et le nombre 
