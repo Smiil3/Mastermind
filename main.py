@@ -10,7 +10,7 @@ def mot_aleatoire(): # creation de la fonction "mot_aleatoire" pour recuperer le
         nombre_de_mots=nombre_de_mots+1 # il va compter toute les lignes
         mots.append(ligne[:-1])#il va prendre tout les lettres du mots sauf la derniere
     fichier.close() # ferme le fichier
-    nombre_aleatoire = random.randint(0, nombre_de_mots) # on va choisir un nombre aléatoire entre 0 et le nombre de lignes
+    nombre_aleatoire = random.randint(0, nombre_de_mots) # on va choisir un nombre aleatoire entre 0 et le nombre de lignes
     mot = mot + str(mots[nombre_aleatoire])#il va mettre le mot en str
     return mot # il va retourner le mot
 
@@ -89,7 +89,7 @@ def ajouter_lettres_valides(mot1, mot2):
     return m #retourne la valeur de m soit un caractere ou bien un "*"
 
 
-def nombre_caracteres_manquent(mot1, mot2, mot_a_trouver): # BUG
+def nombre_caracteres_manquent(mot1, mot2, mot_a_trouver): 
     caracteres_present = [] # ici on definie la variable "caracteres_present" qui est egale a une array
     mots = "" # ici on definie la variable "mots" a un string vide
     nombre = -1 # ici on definie la variable "nombre" a -1
@@ -153,136 +153,114 @@ def jeu():
     """
     if (difficulte == 1):
         boucle1 = True
-        boucle2 = False
-        boucle3 = False
-        boucle4 = False
+        boucle_difficile = False
         tentatives = 10
     elif (difficulte == 2):
         boucle1 = False
-        boucle2 = False
-        boucle3 = False
-        boucle4 = True
+        boucle_difficile = True
         tentatives = 7
-
-    """
-    Ici on montre pour la premiere fois au joueur le mot mystere 
-    et on lui demande d'entrer un mot pour rentrer dans la boucle 1
-    ou dans la boucle 4 en fonction du mode de jeu choisi.
-    """
-    print("Mot mystere :", resultat_de_la_fonction_m_myst[0])
-    mot_utilisateur = input("Proposez un mot :")
-
-    if (nombre_de_tentatives == tentatives): # si le nombre de tentatives est egal a la limite de tentatives
-        print("Vous avez perdu perdu.") # ici on averti le joueur qu'il a perdu
-        # on desactive toutes les boucles
-        boucle1 = False 
-        boucle2 = False
-        boucle3 = False
-        boucle4 = False
-    else: # sinon
-        nombre_de_tentatives = nombre_de_tentatives + 1 # on ajoute une tentative de plus au nombre de tentatives
-
 
     """
     Dans cette premiere boucle nous allons verifier le nombre de lettres que l'utlisateur
     a entre, correspond bien au nombre de lettres du mot mystere a trouver, sinon on lui redemande
-    de rentrer le mot jusqu'a ce que le nombre de lettres corresponde. 
+    de rentrer le mot jusqu'a ce que le nombre de lettres corresponde, pareille pour la premiere et 
+    derniere lettres, ensuite si l'utilisateur a bien rentre le bon format du mot. 
     """
+
+    premiere_demande = True # on definie la variable "premiere_demande" sur True
+    partie_ajout_lettres = False # on definie la variable "partie_ajout_lettres" sur "False"
     while boucle1 == True:
+
+        """
+        Ici on montre pour la premiere fois au joueur le mot mystere 
+        et on lui demande d'entrer un mot pour rentrer dans la boucle 1
+        ou dans la boucle 4 en fonction du mode de jeu choisi.
+        """
+        print("Mot mystere :", resultat_de_la_fonction_m_myst[0])
+        if premiere_demande == True: # si la variable "premiere_demande" est egale a "True"
+            mot_utilisateur = input("Proposez un mot :") # on demande le mot a l'utilisateur
+
+        """
+        Ici nous verifions que le joueur ne 
+        depasse pas le nombre de tentatives.
+        """
+        if (nombre_de_tentatives == tentatives): # si le nombre de tentatives est egal a la limite de tentatives
+            print("Vous avez perdu perdu.") # ici on averti le joueur qu'il a perdu
+            break # on arrete tout
+        else: # sinon
+            nombre_de_tentatives = nombre_de_tentatives + 1 # on ajoute une tentative de plus au nombre de tentatives
+
 
         if (verification_nombre_de_lettre(mot_utilisateur, mot_myst) == False): # si notre fonction "verification_nombre_de_lettres" retourne une valuer booleen "False"
             print("Votre mot contient", nombre_de_lettres(mot_utilisateur) + 1, "lettres alors qu'il en faut", nombre_de_lettres(mot_myst)+1) # on montre l'erreur au joueur
-            mot_utilisateur = input("Proposez un mot :") #on redemande au joueur de resaisir le mot
-
-            """
-            Ici nous verifions que le joueur ne 
-            depasse pas le nombre de tentatives.
-            """
-            if (nombre_de_tentatives == tentatives): # si le nombre de tentatives est egal a la limite de tentatives
-                print("Vous avez perdu.") # ici on averti le joueur qu'il a perdu
-                break # ici on arrete toute la fonction ici.
-            else:  # sinon
-                nombre_de_tentatives = nombre_de_tentatives + 1 # on ajoute une tentative de plus au nombre de tentatives
-
+            creation_du_nouveau_mot = False # on definie la variable "creation_du_nouveau_mot" egale a "False"
         elif (verification_nombre_de_lettre(mot_utilisateur, mot_myst) == True): # sinon si notre fonction "verification_nombre_de_lettres" retourne une valeur booleen "True"
-            boucle1 = False # on sort de la boucle 1
-            boucle2 = True # on rentre dans la boucle 2
+            pass
 
-    
-    """
-    Dans cette deuxieme boucle nous allons verifier que la premiere lettre que l'utlisateur
-    a entre, correspond bien a la premiere lettre du mot mystere a trouver, sinon on lui redemande
-    de rentrer le mot jusqu'a ce que le nombre de lettres corresponde et de meme pour la derniere lettre. 
-    """
-    while boucle2 == True:
+        
+        """
+        Dans cette partie nous allons verifier que la premiere lettre que l'utlisateur
+        a entre, correspond bien a la premiere lettre du mot mystere a trouver, sinon on lui redemande
+        de rentrer le mot jusqu'a ce que le nombre de lettres corresponde et de meme pour la derniere lettre. 
+        """
 
         if (not mot_utilisateur[0] == mot_myst[0]):  #si la premiere lettre du "mot_utilisateur" n'es pas egale a la premiere lettre du "mot_myst"
             print("La 1ere lettre de votre mot est un", mot_utilisateur[0], "alors que ca devrait etre un", mot_myst[0]) # on montre l'erreur au joueur
-            mot_utilisateur = input("Proposez un mot :") 
-
-            if (nombre_de_tentatives == tentatives):
-                print("Vous avez perdu.")
-                break
-            else:
-                nombre_de_tentatives = nombre_de_tentatives + 1
+            creation_du_nouveau_mot = False # on definie la variable "creation_du_nouveau_mot" egale a "False"
 
         if (not mot_utilisateur[nombre_de_lettres(mot_utilisateur)] == mot_myst[nombre_de_lettres(mot_myst)]): #si la derniere lettre du "mot_utilisateur" n'es pas egale a la derniere lettre du "mot_myst" 
             print("La derniere lettre de votre mot est un", mot_utilisateur[nombre_de_lettres(mot_utilisateur)], "alors que ca devrait etre", mot_myst[nombre_de_lettres(mot_myst)])
-            mot_utilisateur = input("Proposez un mot :")
-
-            if (nombre_de_tentatives == tentatives):
-                print("Vous avez perdu.")
-                break
-            else:
-                nombre_de_tentatives = nombre_de_tentatives + 1
+            creation_du_nouveau_mot = False # on definie la variable "creation_du_nouveau_mot" egale a "False"
 
         elif (mot_utilisateur[0] == mot_myst[0] and mot_utilisateur[nombre_de_lettres(mot_utilisateur)] == mot_myst[nombre_de_lettres(mot_myst)]): #sinon si la premiere et la derniere lettre du "mot_utilisateur" correspondent a la premiere et la derniere lettre du "mot_myst"
-            boucle2 = False # on sort de la boucle 2
-            boucle3 = True # on rentre dans la boucle 3
+            partie_ajout_lettres = True # on active la variable "partie_ajout_lettres"
+            creation_du_nouveau_mot = True # on definie la variable "creation_du_nouveau_mot" egale a "True"
+
+
+        """
+        Dans cette partie du programme le programme va ajouter les caracteres valides au mot mystere 
+        qui est affiche au joueur et elle sert aussi a lui montrer le nombre de lettres qui sont 
+        dans le mot mais qui sont mal placees. 
+        """
+        if partie_ajout_lettres == True: 
+            premiere_demande = False # on desactive la demande de mot a l'utilisateur car on va utiliser celle de cette partie
+
+            """
+            Cette verification permet de verifier a chaque fois le mot que l'utilisateur a introduit 
+            pour ne pas avoir d'erreurs lors de l'ajout des nouvelles lettres au mot mystere.
+            """
+            if creation_du_nouveau_mot == True: # si la variable "creation_du_nouveau_mot" est egale a "True"
+                nouveau_mot = ajouter_lettres_valides(mot_myst, mot_utilisateur) # on definie la variable "nouveau_mot" qui va contenir le mot mystere avec les lettres deja trouves par le joueur
+                nombre_caracteres = nombre_caracteres_manquent(mot_utilisateur, nouveau_mot, mot_myst) # on definie la variable "nombre_caracteres" qui va contenir le resultat de la fonction "nombre_caracteres_manquent"
+
+            if (le_mot_est_juste(mot_utilisateur, mot_myst) == False): # si la fonction "le_mot_est_juste" nous retourne une valeur booleen "False"
+                print("Mot mystere :", nouveau_mot) # on montrer le mot mystere au joueur avec les nouvelles lettres
+                print("Lettres mal place :", nombre_caracteres) # on lui montre le nombre de lettres qu'il a mal placee
+                mot_utilisateur = input("Proposez un mot :")
+
+
+            elif(le_mot_est_juste(mot_utilisateur, mot_myst) == True): # sinon si la fonction "le_mot_est_juste" nous retourne une valeur booleen "True"
+                print('Bravo tu as trouver le mot, nombre de tenatives:', nombre_de_tentatives) # on montre au joueur qu'il a gagner
+                boucle1 = False # on sort de la boucle 1
 
 
 
     """
-    Dans cette deuxieme boucle nous allons verifier que la premiere lettre que l'utlisateur
-    a entre, correspond bien a la premiere lettre du mot mystere a trouver, sinon on lui redemande
-    de rentrer le mot jusqu'a ce que le nombre de lettres corresponde et de meme pour la derniere lettre. 
+    Cette boucle "difficile" est pour le mode difficile ou on n'a plus 
+    besoin de faire les verifications et l'ajouts de lettres de la boucle precedente.
     """
-    while boucle3 == True:
-
-        nouveau_mot = ajouter_lettres_valides(mot_myst, mot_utilisateur) # on definie la variable "nouveau_mot" qui va contenir le mot mystere avec les lettres deja trouves par le joueur
-        nombre_caracteres = nombre_caracteres_manquent(mot_utilisateur, nouveau_mot, mot_myst) # on definie la variable "nombre_caracteres" qui va contenir le resultat de la fonction "nombre_caracteres_manquent"
-
-        if (le_mot_est_juste(mot_utilisateur, mot_myst) == False): # si la fonction "le_mot_est_juste" nous retourne une valeur booleen "False"
-            if (nombre_de_tentatives == tentatives):
-                print("Vous avez perdu.")
-                break
-            else:
-                nombre_de_tentatives = nombre_de_tentatives + 1
-
-            print("Mot mystere :", nouveau_mot) # on montrer le mot mystere au joueur avec les nouvelles lettres
-            print("Lettres mal place :", nombre_caracteres) # on lui montre le nombre de lettres qu'il a mal placee
-            mot_utilisateur = input("Proposez un mot :")
-
-
-        elif(le_mot_est_juste(mot_utilisateur, mot_myst) == True): # sinon si la fonction "le_mot_est_juste" nous retourne une valeur booleen "True"
-            boucle3=False # on sort de la boucle 3
-            print('Bravo tu as trouver le mot, nombre de tenatives:', nombre_de_tentatives) # on montre au joueur qu'il a gagner
-
-
-
-    """
-    Cette 4eme boucle est pour le mode difficile ou on n'a plus 
-    besoin de la 1er, 2eme et de la 3eme boucle pour faire les verifications et les ajouts de lettres.
-    """
+    if boucle_difficile == True:
+        mot_utilisateur = input("Proposez un mot :")
     mot_mystere_afficher = resultat_de_la_fonction_m_myst[0] # on definie la variable "mot_mystere_afficher" qui contient le mot_mystere
-    while boucle4 == True:
+    
+    while boucle_difficile == True:
         nouveau_mot = ajouter_lettres_valides(mot_myst, mot_utilisateur) # on definie la variable "nouveau_mot" qui va contenir le mot mystere avec les lettres deja trouves par le joueur
 
         if (le_mot_est_juste(mot_utilisateur, mot_myst) == False): # si la fonction "le_mot_est_juste" nous retourne une valeur booleen "False"
 
             if (nombre_de_tentatives == tentatives):
                 print("Vous avez perdu.")
-                break
+                boucle_difficile = False
             else:
                 nombre_de_tentatives = nombre_de_tentatives + 1
 
@@ -294,8 +272,6 @@ def jeu():
             mot_utilisateur = input("Proposez un mot :")
         elif (le_mot_est_juste(mot_utilisateur, mot_myst) == True): # sinon si la fonction "le_mot_est_juste" nous retourne une valeur booleen "True"
             print('Bravo tu as trouver le mot, nombre de tenatives:', nombre_de_tentatives) # on montre au joueur qu'il a gagner
-            boucle4 = False #on sort de la boucle 4
+            boucle_difficile = False #on sort de la boucle 4
 
 jeu()
-
-
