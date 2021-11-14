@@ -52,6 +52,7 @@ def mot_mystere(difficulte, mode):
                 mot2 = mot2 + "*" # va prendre le mot 2 + des astérixs sauf pour la premiere et derniere lettre
             else: # sinon 
                 mot2 = mot2+caractere # on ajoute la lettre ici representer par la variable "i" au mot
+        print("TEST2", mot2, mot)
         return mot2, mot # on retourne le mot mystere et le mot de la fonction mot_aleatoire
 
     elif (difficulte == 2): # sinon si la "difficulte" est difficile 
@@ -88,14 +89,14 @@ def ajouter_lettres_valides(mot1, mot2):
     return m #retourne la valeur de m soit un caractere ou bien un "*"
 
 
-def nombre_caracteres_manquent(mot1, mot2, mot_a_trouver):
+def nombre_caracteres_manquent(mot1, mot2, mot_a_trouver): # BUG
     caracteres_present = [] # ici on definie la variable "caracteres_present" qui est egale a une array
     mots = "" # ici on definie la variable "mots" a un string vide
     nombre = -1 # ici on definie la variable "nombre" a -1
     for caractere1 in mot1: # pour chaque caractere dans la variable "mot1"
         nombre = nombre + 1 # on ajoute 1 a la variable "nombre"
         if (not caractere1 == mot2[nombre]): # si le caracatere du "mot1" n'est pas egale au meme caratere du "mot2"
-            mots = mots + caractere1 # on ajoute le caractere du "mot1" a notre variable "mots"
+            mots = mots + caractere1 # on ajoute le car1actere du "mot1" a notre variable "mots"
     for caractere2 in mots: #pour chaque caractere dans la variable "mots"
         caracteres_present.append(caractere2) #on ajoute le caractere de la variable "mots" dans l'array "a"
     nombre2 = 0 # on definie la variable "nombre2" qui est egale a 0
