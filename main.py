@@ -1,3 +1,4 @@
+# importer des librairies python necessaires
 import random 
 
 
