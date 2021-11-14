@@ -250,6 +250,7 @@ def jeu():
     besoin de faire les verifications et l'ajouts de lettres de la boucle precedente.
     """
     if boucle_difficile == True:
+        print("Mot mystere :", resultat_de_la_fonction_m_myst[0])
         mot_utilisateur = input("Proposez un mot :")
     mot_mystere_afficher = resultat_de_la_fonction_m_myst[0] # on definie la variable "mot_mystere_afficher" qui contient le mot_mystere
     

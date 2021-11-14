@@ -95,6 +95,47 @@ Vous avez perdu perdu.
 
 Test2:
 
+>Vous lance test.py.
+Modes de jeu disponibles:
+ 1 - Solo | Facile
+ 2 - Solo | Difficile
+ 3 - Multijoueur | Facile
+ 4 - Multijoueur | Difficile
+Veuillez choisir le nombre correspondant au mode du jeu auquel vous voulez jouer:
+
+>Vous choisissez le mode de jeu 4 donc vous rentrez 4
+Joueur nr 2, veuillez introduire le mot a deviner en majuscule:
+
+>Vous rentrez AVION
+Mot mystere : *****
+Proposez un mot :
+
+>Vous rentrez A
+Mot mystere : *****
+Proposez un mot :
+
+>Vous rentrez AAAAA
+Mot mystere : A****
+Proposez un mot :
+
+>Vous rentrez AVAAA
+Mot mystere : AV***
+Proposez un mot :
+
+>Vous rentrez A
+Mot mystere : AV***
+Proposez un mot :
+
+>Vous rentrez AAAAA
+Mot mystere : AV***
+Proposez un mot :
+
+>Vous rentrez AAAAAAAZZZZZ
+Mot mystere : AV***
+Proposez un mot :
+
+>Vous rentrez AVION
+Bravo tu as trouver le mot, nombre de tenatives: 6
 
 
 Test3:
