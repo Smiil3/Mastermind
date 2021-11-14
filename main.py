@@ -1,4 +1,3 @@
-# importer des librairies python necessaires
 import random 
 
 
@@ -195,6 +194,8 @@ def jeu():
         if (verification_nombre_de_lettre(mot_utilisateur, mot_myst) == False): # si notre fonction "verification_nombre_de_lettres" retourne une valuer booleen "False"
             print("Votre mot contient", nombre_de_lettres(mot_utilisateur) + 1, "lettres alors qu'il en faut", nombre_de_lettres(mot_myst)+1) # on montre l'erreur au joueur
             creation_du_nouveau_mot = False # on definie la variable "creation_du_nouveau_mot" egale a "False"
+        elif (verification_nombre_de_lettre(mot_utilisateur, mot_myst) == True): # sinon si notre fonction "verification_nombre_de_lettres" retourne une valeur booleen "True"
+            pass
 
         
         """
