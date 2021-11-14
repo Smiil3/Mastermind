@@ -52,7 +52,6 @@ def mot_mystere(difficulte, mode):
                 mot2 = mot2 + "*" # va prendre le mot 2 + des astérixs sauf pour la premiere et derniere lettre
             else: # sinon 
                 mot2 = mot2+caractere # on ajoute la lettre ici representer par la variable "i" au mot
-        print("TEST2", mot2, mot)
         return mot2, mot # on retourne le mot mystere et le mot de la fonction mot_aleatoire
 
     elif (difficulte == 2): # sinon si la "difficulte" est difficile 
