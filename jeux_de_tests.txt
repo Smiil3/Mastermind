@@ -1,1 +1,118 @@
-#Soon
+Test1:
+
+>Vous lance test.py.
+Modes de jeu disponibles:
+ 1 - Solo | Facile
+ 2 - Solo | Difficile
+ 3 - Multijoueur | Facile
+ 4 - Multijoueur | Difficile
+Veuillez choisir le nombre correspondant au mode du jeu auquel vous voulez jouer:
+
+>Vous choisissez le mode de jeu 1 donc vous rentrer 1
+Mot mystere :  B*****R
+Proposez un mot :
+
+>Vous rentrer B
+Nombre tentatives: 1
+Votre mot contient 1 lettres alors qu'il en faut 7
+La derniere lettre de votre mot est un B alors que ca devrait etre R
+Mot mystere :  B*****R
+Proposez un mot : 
+
+>Vous rentrer BBBBBBB
+Nombre tentatives: 2
+La derniere lettre de votre mot est un B alors que ca devrait etre R
+Mot mystere :  B*****R
+Proposez un mot :
+
+>Vous rentrer BBBBBBR
+Nombre tentatives: 3
+Mot mystere : B*****R
+Lettres mal place : 0
+Proposez un mot :
+
+>Vous rentrer BOBJBBR
+Nombre tentatives: 4
+Mot mystere : BO*J**R
+Lettres mal place : 0
+Proposez un mot :
+
+>Vous rentrer Z
+Nombre tentatives: 5
+Votre mot contient 1 lettres alors qu'il en faut 7
+La 1ere lettre de votre mot est un Z alors que ca devrait etre un B
+La derniere lettre de votre mot est un Z alors que ca devrait etre R
+Mot mystere : BO*J**R
+Lettres mal place : 0
+Proposez un mot :
+
+1er CHOIX
+
+>Vous rentrer BONJOUR
+Nombre tentatives: 6
+Bravo tu as trouver le mot, nombre de tenatives: 6
+
+2eme CHOIX
+
+>Vous rentrer BONJBBR
+Nombre tentatives: 6
+Mot mystere : BONJ**R
+Lettres mal place : 0
+Proposez un mot :
+
+>Vous rentrer BONJOBR
+Nombre tentatives: 7
+Mot mystere : BONJO*R
+Lettres mal place : 0
+Proposez un mot :
+
+>Vous rentrer A
+Nombre tentatives: 8
+Votre mot contient 1 lettres alors qu'il en faut 7
+La 1ere lettre de votre mot est un A alors que ca devrait etre un B
+La derniere lettre de votre mot est un A alors que ca devrait etre R
+Mot mystere : BONJO*R
+Lettres mal place : 0
+
+>Vous rentrer ZZZZZZZZZZZZZZZZZZZZZZZ
+Nombre tentatives: 9
+Votre mot contient 23 lettres alors qu'il en faut 7
+La 1ere lettre de votre mot est un Z alors que ca devrait etre un B
+La derniere lettre de votre mot est un Z alors que ca devrait etre R
+Mot mystere : BONJO*R
+Lettres mal place : 0
+
+>Vous rentrer bonjour
+Nombre tentatives: 10
+La 1ere lettre de votre mot est un b alors que ca devrait etre un B
+La derniere lettre de votre mot est un r alors que ca devrait etre R
+Mot mystere : BONJO*R
+Lettres mal place : 0
+
+>Vous rentrer a
+Vous avez perdu perdu.
+
+
+Test2:
+
+
+
+Test3:
+
+>Lancer le fichier eduard.py
+Test 1er Fonction: 2
+Test 2eme Fonction: False
+
+
+Test4:
+
+>Lancer le fichier oceane.py
+0
+B**JOUR
+
+
+Test5:
+
+>Lancer le fichier mathias.py
+BONJOUR
+(' B*****R', 'BONJOUR')

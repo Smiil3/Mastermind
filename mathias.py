@@ -1,7 +1,7 @@
 import random
 
 def mot_aleatoire(): # creation de la fonction "mot_aleatoire" pour recuperer le mot aleatoire
-    fichier=open("dictionnaire.txt","r") # creation de la variable "fichier" qui ouvre le ficher en mode lecture
+    fichier=open("dictionnaire_test.txt","r") # creation de la variable "fichier" qui ouvre le ficher en mode lecture
     mot = "" # creation de la variable "mot" egale a un string
     mots=[] # creation d'une array "mots"
     nombre_de_mots=-1 # creation de la variable "nombre_de_mots" egale a -1 car l'array commence a 0

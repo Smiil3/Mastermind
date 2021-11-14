@@ -167,7 +167,7 @@ def jeu():
     derniere lettres, ensuite si l'utilisateur a bien rentre le bon format du mot. 
     """
 
-    premiere_demande = True # on definie la variable "premiere_demande" sur True
+    premiere_demande = True # on definie la variable "premiere_demande" sur "True"
     partie_ajout_lettres = False # on definie la variable "partie_ajout_lettres" sur "False"
     while boucle1 == True:
 
@@ -176,8 +176,8 @@ def jeu():
         et on lui demande d'entrer un mot pour rentrer dans la boucle 1
         ou dans la boucle 4 en fonction du mode de jeu choisi.
         """
-        print("Mot mystere :", resultat_de_la_fonction_m_myst[0])
         if premiere_demande == True: # si la variable "premiere_demande" est egale a "True"
+            print("Mot mystere :", resultat_de_la_fonction_m_myst[0])
             mot_utilisateur = input("Proposez un mot :") # on demande le mot a l'utilisateur
 
         """
@@ -189,7 +189,7 @@ def jeu():
             break # on arrete tout
         else: # sinon
             nombre_de_tentatives = nombre_de_tentatives + 1 # on ajoute une tentative de plus au nombre de tentatives
-
+            print("Nombre tentatives:", nombre_de_tentatives)
 
         if (verification_nombre_de_lettre(mot_utilisateur, mot_myst) == False): # si notre fonction "verification_nombre_de_lettres" retourne une valuer booleen "False"
             print("Votre mot contient", nombre_de_lettres(mot_utilisateur) + 1, "lettres alors qu'il en faut", nombre_de_lettres(mot_myst)+1) # on montre l'erreur au joueur
@@ -265,6 +265,8 @@ def jeu():
                 nombre_de_tentatives = nombre_de_tentatives + 1
 
             if (nouveau_mot == None): # si le joueur ne respecte pas le nombre de "*" qui correspond au nombre de lettres du mot a trouver la fonction "nouveau_mot" va retourner "None" qui est un valeur vide
+                print("Mot mystere :", mot_mystere_afficher) # on affiche le mot mystere qui va etre le resultat de la fonction "mot_mystere"
+            elif (nouveau_mot.count("*") > mot_mystere_afficher.count("*")): # si le joueur ne respecte pas les caracteres deja presents dans le mot la fonction "nouveau_mot" va supprimer les lettres deja ajoutees
                 print("Mot mystere :", mot_mystere_afficher) # on affiche le mot mystere qui va etre le resultat de la fonction "mot_mystere"
             else: #sinon si le joueur a trouver des lettres valides
                 print("Mot mystere :", nouveau_mot) # on affiche la variable "nouveau_mot"
