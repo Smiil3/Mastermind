@@ -2,6 +2,14 @@ mot1 = "AAION"
 mot2 = "A***N"
 mot_a_trouver = "AVION"
 def nombre_caracteres_manquent(mot1, mot2, mot_a_trouver):
+    """
+    Une fonction qui permet est de compter le nombre de 
+    lettres valides mais mal placées.
+    Pre-condition: des chaines de caractere en parametres
+    Entree : “mot_utilisateur, nouveau_mot et mot_original”
+    Sortie : nombre de lettres mal placées
+    """
+
     caracteres_present = [] # ici on definie la variable "caracteres_present" qui est egale a une array
     mots = "" # ici on definie la variable "mots" a un string vide
     nombre = -1 # ici on definie la variable "nombre" a -1
@@ -21,7 +29,18 @@ print("Test 1er Fonction:", nombre_caracteres_manquent(mot1, mot2, mot_a_trouver
 
 
 
+
 def le_mot_est_juste(mot1, mot2):
+    """
+    Le rôle de cette fonction est de vérifier si le 
+    “mot1” est égal au “mot2”.
+    Entree: “mot1 et mot2”
+    Pre-condition: des chaines de caractere en parametres
+    Sortie: une valeur booléen vrai ou une valeur booleen fausse. 
+    Post-condition : Vrai ou Faux
+
+    
+    """
     if (mot1 == mot2): #si le mot1 est egal a mot2 alors on return True sinon false
         resultat_de_la_fonction = True # on definie la variable "resultat_de_la_fonction" qui est egal a la valeur booleene "True"
     else: #sinon
